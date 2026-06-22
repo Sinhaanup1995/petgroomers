@@ -455,10 +455,10 @@ function Footer() {
           <a href="#contact" className="hover:text-aqua transition-colors">Contact</a>
         </nav>
         <div className="flex md:justify-end gap-3">
-          <a href="#" aria-label="Instagram" className="h-11 w-11 rounded-full bg-background/10 grid place-items-center hover:bg-coral transition-colors">
+          <a href="https://www.instagram.com/petsgroomers1?igsh=MXVoYTdoOW05aXZ6aQ%3D%3D" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="h-11 w-11 rounded-full bg-background/10 grid place-items-center hover:bg-coral transition-colors">
             <Instagram className="h-5 w-5" />
           </a>
-          <a href="#" aria-label="Facebook" className="h-11 w-11 rounded-full bg-background/10 grid place-items-center hover:bg-coral transition-colors">
+          <a href="https://www.facebook.com/profile.php?id=100086664415856&mibextid=wwXIfr&rdid=YwVQ3TpM65McEWDm&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15v3C8AYEiE%2F%3Fmibextid%3DwwXIfr%26ref%3D1" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="h-11 w-11 rounded-full bg-background/10 grid place-items-center hover:bg-coral transition-colors">
             <Facebook className="h-5 w-5" />
           </a>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="h-11 w-11 rounded-full bg-background/10 grid place-items-center hover:bg-coral transition-colors">
