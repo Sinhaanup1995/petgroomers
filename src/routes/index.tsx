@@ -7,8 +7,9 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
-import logo from "@/assets/petgroomers-logo.asset.json";
+import logo from "@/assets/FINAL LOGO PETS GROOMERS-02.png";
 import hero from "@/assets/hero-grooming.jpg";
+import cat from "@/assets/cat.jpeg";
 import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
@@ -59,16 +60,16 @@ const services = [
     image: svcFull,
     name: "Full Grooming",
     price: "Rs. 2,000",
-    short: "Everything in the Spa Bath Package plus sanitary cutting.",
-    details: [...spaBathDetails, "Sanitary Cutting"],
+    short: "Complete bath, haircut & all grooming services in one session.",
+    details: [...spaBathDetails, "Haircut / Breed-specific Styling", "Sanitary Cutting", "Blow Dry & Finishing Spray"],
   },
   {
     icon: Sparkles,
     image: svcExtra,
     name: "Grooming with Extra Care",
     price: "Rs. 2,500",
-    short: "Full grooming plus pampering add-ons your pet will love.",
-    details: ["Everything in Full Grooming", "De-shedding treatment", "Soothing paw massage", "Teeth brushing"],
+    short: "Full grooming plus tick treatment and pampering add-ons your pet will love.",
+    details: ["Everything in Full Grooming", "Tick Treatment", "De-shedding Treatment", "Soothing Paw Massage", "Teeth Brushing"],
   },
   {
     icon: Heart,
@@ -121,8 +122,8 @@ function Nav() {
     <header className="sticky top-0 z-40 w-full bg-background/85 backdrop-blur-md border-b border-border">
       <div className="mx-auto max-w-7xl px-6 h-24 flex items-center justify-between">
         <a href="#top" className="flex items-center gap-3" aria-label="Petgroomers home">
-          <span className="grid place-items-center h-20 w-20 rounded-2xl bg-primary p-2 shadow-[var(--shadow-soft)]">
-            <img src={logo.url} alt="Petgroomers logo" className="h-full w-full object-contain" />
+          <span className="grid place-items-center h-24 w-24">
+            <img src={logo} alt="Petgroomers logo" className="h-full w-full object-contain drop-shadow-md" />
           </span>
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
@@ -177,8 +178,11 @@ function Hero() {
           </div>
         </div>
         <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-tr from-aqua/30 to-coral/20 rounded-[3rem] rotate-3" />
-          <img src={hero} alt="Happy puppy being groomed" width={1280} height={1024} className="relative rounded-[3rem] shadow-[var(--shadow-card)] w-full" />
+          <div className="absolute -inset-4 bg-gradient-to-tr from-aqua/30 to-coral/20 rounded-[3rem] rotate-2 -z-10" />
+          <div className="relative grid grid-cols-2 gap-4">
+            <img src={hero} alt="Happy dog being groomed" width={640} height={800} className="rounded-[2rem] shadow-[var(--shadow-card)] w-full aspect-[3/4] object-cover" />
+            <img src={cat} alt="Happy cat being groomed" width={640} height={800} className="rounded-[2rem] shadow-[var(--shadow-card)] w-full aspect-[3/4] object-cover mt-10" />
+          </div>
           <div className="absolute -bottom-6 -left-6 bg-card rounded-2xl shadow-[var(--shadow-soft)] p-4 flex items-center gap-3">
             <div className="h-12 w-12 rounded-xl bg-aqua/30 grid place-items-center"><Smile className="h-6 w-6 text-primary"/></div>
             <div>
@@ -232,6 +236,9 @@ function Services() {
           <span className="text-coral font-bold uppercase tracking-widest text-sm">Our Services</span>
           <h2 className="mt-3 text-4xl md:text-5xl font-black text-primary">Grooming made delightful</h2>
           <p className="mt-4 text-muted-foreground">Pick the perfect package for your pet — every service ends in tail wags.</p>
+          <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-coral/15 border-2 border-coral/40 px-6 py-2.5">
+            <span className="text-base font-black text-coral tracking-wide">🐶 Dogs &amp; 🐱 Cats — We Groom Both!</span>
+          </div>
         </div>
         <div className="mt-14 grid sm:grid-cols-2 gap-6">
           {services.map((s) => (<ServiceCard key={s.name} service={s} />))}
@@ -387,8 +394,8 @@ function Contact() {
           </p>
           <ul className="mt-10 space-y-5">
             <ContactRow icon={Phone} label={PHONE_DISPLAY} />
-            <ContactRow icon={MapPin} label="123 Pet Lane, New Delhi" />
-            <ContactRow icon={Clock} label="Mon – Sat: 10:00 AM – 8:00 PM" />
+            <ContactRow icon={MapPin} label="Pan India Services — We Come to You!" />
+            <ContactRow icon={Clock} label="7 Days a Week: 8:00 AM – 8:00 PM" />
           </ul>
         </div>
         <div className="bg-background text-foreground rounded-3xl p-8 md:p-10 shadow-[var(--shadow-card)] space-y-6">
@@ -411,7 +418,7 @@ function Contact() {
             </Button>
           </div>
           <div className="text-center pt-4 border-t border-border">
-            <p className="text-sm text-muted-foreground">Available Mon – Sat, 10 AM to 8 PM</p>
+            <p className="text-sm text-muted-foreground">Available 7 Days a Week, 8 AM to 8 PM</p>
           </div>
         </div>
       </div>
@@ -435,8 +442,8 @@ function Footer() {
     <footer className="bg-[oklch(0.22_0.04_180)] text-primary-foreground">
       <div className="mx-auto max-w-7xl px-6 py-14 grid md:grid-cols-3 gap-10 items-center">
         <div className="flex items-center gap-3">
-          <span className="grid place-items-center h-16 w-16 rounded-2xl bg-primary p-2">
-            <img src={logo.url} alt="Petgroomers logo" className="h-full w-full object-contain" />
+          <span className="grid place-items-center h-20 w-20">
+            <img src={logo} alt="Petgroomers logo" className="h-full w-full object-contain drop-shadow-md" />
           </span>
           <p className="text-sm text-primary-foreground/70 max-w-[200px]">Care your pet will love.</p>
         </div>
