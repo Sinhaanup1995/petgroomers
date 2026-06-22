@@ -120,10 +120,10 @@ function Index() {
 function Nav() {
   return (
     <header className="sticky top-0 z-40 w-full bg-background/85 backdrop-blur-md border-b border-border">
-      <div className="mx-auto max-w-7xl px-6 h-24 flex items-center justify-between">
+      <div className="mx-auto max-w-7xl px-6 h-28 flex items-center justify-between">
         <a href="#top" className="flex items-center gap-3" aria-label="Petgroomers home">
-          <span className="grid place-items-center h-24 w-24">
-            <img src={logo} alt="Petgroomers logo" className="h-full w-full object-contain drop-shadow-md" />
+          <span className="grid place-items-center h-24 w-24 rounded-2xl bg-[oklch(0.22_0.04_180)] p-1.5">
+            <img src={logo} alt="Petgroomers logo" className="h-full w-full object-contain" />
           </span>
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
@@ -442,8 +442,8 @@ function Footer() {
     <footer className="bg-[oklch(0.22_0.04_180)] text-primary-foreground">
       <div className="mx-auto max-w-7xl px-6 py-14 grid md:grid-cols-3 gap-10 items-center">
         <div className="flex items-center gap-3">
-          <span className="grid place-items-center h-20 w-20">
-            <img src={logo} alt="Petgroomers logo" className="h-full w-full object-contain drop-shadow-md" />
+          <span className="grid place-items-center h-24 w-24 rounded-2xl bg-[oklch(0.22_0.04_180)] p-1.5">
+            <img src={logo} alt="Petgroomers logo" className="h-full w-full object-contain" />
           </span>
           <p className="text-sm text-primary-foreground/70 max-w-[200px]">Care your pet will love.</p>
         </div>
