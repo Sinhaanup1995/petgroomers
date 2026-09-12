@@ -16,8 +16,10 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        coral: "bg-coral text-coral-foreground shadow-[var(--shadow-soft)] hover:brightness-110 hover:-translate-y-0.5 transition-all",
-        tealOutline: "border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground transition-colors",
+        coral:
+          "bg-coral text-coral-foreground shadow-[var(--shadow-soft)] hover:brightness-110 hover:-translate-y-0.5 transition-all",
+        tealOutline:
+          "border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground transition-colors",
       },
       size: {
         default: "h-10 px-5 py-2",

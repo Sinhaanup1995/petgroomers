@@ -9,38 +9,266 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as LocationsRouteImport } from './routes/locations'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as GuidesIndexRouteImport } from './routes/guides.index'
+import { Route as BreedsIndexRouteImport } from './routes/breeds.index'
+import { Route as ServicesServiceRouteImport } from './routes/services.$service'
+import { Route as GuidesGuideRouteImport } from './routes/guides.$guide'
+import { Route as BreedsBreedRouteImport } from './routes/breeds.$breed'
+import { Route as PetGroomingCityIndexRouteImport } from './routes/pet-grooming.$city.index'
+import { Route as PetGroomingCityServiceRouteImport } from './routes/pet-grooming.$city.$service'
 
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocationsRoute = LocationsRouteImport.update({
+  id: '/locations',
+  path: '/locations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesIndexRoute = GuidesIndexRouteImport.update({
+  id: '/guides/',
+  path: '/guides/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BreedsIndexRoute = BreedsIndexRouteImport.update({
+  id: '/breeds/',
+  path: '/breeds/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesServiceRoute = ServicesServiceRouteImport.update({
+  id: '/services/$service',
+  path: '/services/$service',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesGuideRoute = GuidesGuideRouteImport.update({
+  id: '/guides/$guide',
+  path: '/guides/$guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BreedsBreedRoute = BreedsBreedRouteImport.update({
+  id: '/breeds/$breed',
+  path: '/breeds/$breed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PetGroomingCityIndexRoute = PetGroomingCityIndexRouteImport.update({
+  id: '/pet-grooming/$city/',
+  path: '/pet-grooming/$city/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PetGroomingCityServiceRoute = PetGroomingCityServiceRouteImport.update({
+  id: '/pet-grooming/$city/$service',
+  path: '/pet-grooming/$city/$service',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/locations': typeof LocationsRoute
+  '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
+  '/breeds/$breed': typeof BreedsBreedRoute
+  '/guides/$guide': typeof GuidesGuideRoute
+  '/services/$service': typeof ServicesServiceRoute
+  '/breeds/': typeof BreedsIndexRoute
+  '/guides/': typeof GuidesIndexRoute
+  '/services/': typeof ServicesIndexRoute
+  '/pet-grooming/$city/$service': typeof PetGroomingCityServiceRoute
+  '/pet-grooming/$city/': typeof PetGroomingCityIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/locations': typeof LocationsRoute
+  '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
+  '/breeds/$breed': typeof BreedsBreedRoute
+  '/guides/$guide': typeof GuidesGuideRoute
+  '/services/$service': typeof ServicesServiceRoute
+  '/breeds': typeof BreedsIndexRoute
+  '/guides': typeof GuidesIndexRoute
+  '/services': typeof ServicesIndexRoute
+  '/pet-grooming/$city/$service': typeof PetGroomingCityServiceRoute
+  '/pet-grooming/$city': typeof PetGroomingCityIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/locations': typeof LocationsRoute
+  '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
+  '/breeds/$breed': typeof BreedsBreedRoute
+  '/guides/$guide': typeof GuidesGuideRoute
+  '/services/$service': typeof ServicesServiceRoute
+  '/breeds/': typeof BreedsIndexRoute
+  '/guides/': typeof GuidesIndexRoute
+  '/services/': typeof ServicesIndexRoute
+  '/pet-grooming/$city/$service': typeof PetGroomingCityServiceRoute
+  '/pet-grooming/$city/': typeof PetGroomingCityIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/locations'
+    | '/pricing'
+    | '/privacy'
+    | '/terms'
+    | '/breeds/$breed'
+    | '/guides/$guide'
+    | '/services/$service'
+    | '/breeds/'
+    | '/guides/'
+    | '/services/'
+    | '/pet-grooming/$city/$service'
+    | '/pet-grooming/$city/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/locations'
+    | '/pricing'
+    | '/privacy'
+    | '/terms'
+    | '/breeds/$breed'
+    | '/guides/$guide'
+    | '/services/$service'
+    | '/breeds'
+    | '/guides'
+    | '/services'
+    | '/pet-grooming/$city/$service'
+    | '/pet-grooming/$city'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/locations'
+    | '/pricing'
+    | '/privacy'
+    | '/terms'
+    | '/breeds/$breed'
+    | '/guides/$guide'
+    | '/services/$service'
+    | '/breeds/'
+    | '/guides/'
+    | '/services/'
+    | '/pet-grooming/$city/$service'
+    | '/pet-grooming/$city/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  LocationsRoute: typeof LocationsRoute
+  PricingRoute: typeof PricingRoute
+  PrivacyRoute: typeof PrivacyRoute
+  TermsRoute: typeof TermsRoute
+  BreedsBreedRoute: typeof BreedsBreedRoute
+  GuidesGuideRoute: typeof GuidesGuideRoute
+  ServicesServiceRoute: typeof ServicesServiceRoute
+  BreedsIndexRoute: typeof BreedsIndexRoute
+  GuidesIndexRoute: typeof GuidesIndexRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
+  PetGroomingCityServiceRoute: typeof PetGroomingCityServiceRoute
+  PetGroomingCityIndexRoute: typeof PetGroomingCityIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/locations': {
+      id: '/locations'
+      path: '/locations'
+      fullPath: '/locations'
+      preLoaderRoute: typeof LocationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +276,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/': {
+      id: '/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/': {
+      id: '/guides/'
+      path: '/guides'
+      fullPath: '/guides/'
+      preLoaderRoute: typeof GuidesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/breeds/': {
+      id: '/breeds/'
+      path: '/breeds'
+      fullPath: '/breeds/'
+      preLoaderRoute: typeof BreedsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/$service': {
+      id: '/services/$service'
+      path: '/services/$service'
+      fullPath: '/services/$service'
+      preLoaderRoute: typeof ServicesServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/$guide': {
+      id: '/guides/$guide'
+      path: '/guides/$guide'
+      fullPath: '/guides/$guide'
+      preLoaderRoute: typeof GuidesGuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/breeds/$breed': {
+      id: '/breeds/$breed'
+      path: '/breeds/$breed'
+      fullPath: '/breeds/$breed'
+      preLoaderRoute: typeof BreedsBreedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pet-grooming/$city/': {
+      id: '/pet-grooming/$city/'
+      path: '/pet-grooming/$city'
+      fullPath: '/pet-grooming/$city/'
+      preLoaderRoute: typeof PetGroomingCityIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pet-grooming/$city/$service': {
+      id: '/pet-grooming/$city/$service'
+      path: '/pet-grooming/$city/$service'
+      fullPath: '/pet-grooming/$city/$service'
+      preLoaderRoute: typeof PetGroomingCityServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  LocationsRoute: LocationsRoute,
+  PricingRoute: PricingRoute,
+  PrivacyRoute: PrivacyRoute,
+  TermsRoute: TermsRoute,
+  BreedsBreedRoute: BreedsBreedRoute,
+  GuidesGuideRoute: GuidesGuideRoute,
+  ServicesServiceRoute: ServicesServiceRoute,
+  BreedsIndexRoute: BreedsIndexRoute,
+  GuidesIndexRoute: GuidesIndexRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
+  PetGroomingCityServiceRoute: PetGroomingCityServiceRoute,
+  PetGroomingCityIndexRoute: PetGroomingCityIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

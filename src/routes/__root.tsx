@@ -1,8 +1,7 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
   Link,
-  createRootRouteWithContext,
+  createRootRoute,
   useRouter,
   HeadContent,
   Scripts,
@@ -72,28 +71,49 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Petgroomers — Professional Pet Grooming Salon" },
-      { name: "description", content: "Petgroomers offers spa baths, full grooming, and gentle handling by certified groomers. Book your pet's pampering session today." },
+      {
+        name: "description",
+        content:
+          "Petgroomers offers spa baths, full grooming, and gentle handling by certified groomers. Book your pet's pampering session today.",
+      },
       { name: "author", content: "Petgroomers" },
       { property: "og:title", content: "Petgroomers — Professional Pet Grooming Salon" },
-      { property: "og:description", content: "Petgroomers offers spa baths, full grooming, and gentle handling by certified groomers. Book your pet's pampering session today." },
+      {
+        property: "og:description",
+        content:
+          "Petgroomers offers spa baths, full grooming, and gentle handling by certified groomers. Book your pet's pampering session today.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Petgroomers — Professional Pet Grooming Salon" },
-      { name: "twitter:description", content: "Petgroomers offers spa baths, full grooming, and gentle handling by certified groomers. Book your pet's pampering session today." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/45e5f6e4-ed2d-4aa6-ac9c-3b80b0e35993/id-preview-a0314d73--c2c87b42-e33a-41bc-97ab-52523765435d.lovable.app-1782046629050.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/45e5f6e4-ed2d-4aa6-ac9c-3b80b0e35993/id-preview-a0314d73--c2c87b42-e33a-41bc-97ab-52523765435d.lovable.app-1782046629050.png" },
+      {
+        name: "twitter:description",
+        content:
+          "Petgroomers offers spa baths, full grooming, and gentle handling by certified groomers. Book your pet's pampering session today.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/45e5f6e4-ed2d-4aa6-ac9c-3b80b0e35993/id-preview-a0314d73--c2c87b42-e33a-41bc-97ab-52523765435d.lovable.app-1782046629050.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/45e5f6e4-ed2d-4aa6-ac9c-3b80b0e35993/id-preview-a0314d73--c2c87b42-e33a-41bc-97ab-52523765435d.lovable.app-1782046629050.png",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -106,11 +126,31 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
+        {/* Ahead of HeadContent: TanStack sorts stylesheets first, so a
+            preconnect declared in the route `links:` array lands AFTER the
+            font stylesheet that needs it, making the hint dead. */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <HeadContent />
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=AW-17957354748"
-        />
+        {/*
+          Google Ads tag. The remote bundle is ~155KB brotli / ~460KB parsed —
+          larger than this entire app — so loading it in <head> made it compete
+          with the stylesheet, fonts and hydration through the whole LCP window.
+          The inline stub below queues every call, so deferring the download
+          loses nothing.
+
+          Notes on the loader, learned the hard way:
+          - requestIdleCallback's 2nd arg is an IdleRequestOptions dictionary,
+            NOT a millisecond number. Passing a number throws, and because the
+            'load' listener is {once:true} it is already gone — the tag then
+            never loads for a visitor who does not interact.
+          - 'scroll'/'mousemove' are in the interaction list because a desktop
+            wheel-scroller fires none of pointerdown/keydown/touchstart.
+          - Interaction handlers defer via setTimeout(...,0) so a 460KB parse
+            never lands inside the user's first tap (INP).
+          - A 5s timer is the final backstop; the `loaded` flag dedupes.
+          Kept terse on purpose: this string ships on all 128 pages.
+        */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -118,6 +158,31 @@ function RootShell({ children }: { children: ReactNode }) {
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', 'AW-17957354748');
+              (function(){
+                var done=false;
+                function load(){
+                  if(done)return; done=true;
+                  var s=document.createElement('script');
+                  s.async=true;
+                  s.src='https://www.googletagmanager.com/gtag/js?id=AW-17957354748';
+                  document.head.appendChild(s);
+                }
+                function soon(){setTimeout(load,0);}
+                function idle(){
+                  try{
+                    if(window.requestIdleCallback)window.requestIdleCallback(load,{timeout:3000});
+                    else setTimeout(load,1);
+                  }catch(e){setTimeout(load,1);}
+                }
+                try{
+                  if(document.readyState==='complete')idle();
+                  else window.addEventListener('load',idle,{once:true});
+                  ['pointerdown','keydown','touchstart','scroll','mousemove'].forEach(function(e){
+                    window.addEventListener(e,soon,{once:true,passive:true});
+                  });
+                }catch(e){}
+                setTimeout(load,5000);
+              })();
             `,
           }}
         />
@@ -131,12 +196,6 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 function RootComponent() {
-  const { queryClient } = Route.useRouteContext();
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
-    </QueryClientProvider>
-  );
+  // Required: nested routes render here. Removing <Outlet /> breaks all child routes.
+  return <Outlet />;
 }
